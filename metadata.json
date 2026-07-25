@@ -1,0 +1,6 @@
+{
+  "name": "看護媒合平台",
+  "description": "簡單文青風格的專業看護與照服員智慧媒合與服務託管平台",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
