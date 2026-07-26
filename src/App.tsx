@@ -20,6 +20,7 @@ import { ParallaxSection } from './components/ParallaxSection';
 import { ScrollReveal } from './components/ScrollReveal';
 import { MagneticButton } from './components/MagneticButton';
 import { GoogleFormSection } from './components/GoogleFormSection';
+import { MobileBottomNav } from './components/MobileBottomNav';
 import { useTheme } from './hooks/useTheme';
 
 import { MOCK_CAREGIVERS, MOCK_REVIEWS, MOCK_COURSES, INITIAL_BOOKINGS } from './data/mockData';
@@ -201,7 +202,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] text-[#2C2C2C] font-sans selection:bg-[#4A6741]/20 selection:text-[#4A6741] flex flex-col relative">
+    <div className="min-h-screen bg-[#FAF9F6] dark:bg-[#121612] text-[#2C2C2C] dark:text-[#F2F0E9] font-sans selection:bg-[#4A6741]/20 selection:text-[#4A6741] flex flex-col relative pb-16 md:pb-0 transition-colors">
       
       {/* App Header */}
       <Header
@@ -502,6 +503,30 @@ export default function App() {
           onCancelBooking={handleCancelBooking}
         />
       )}
+
+      {/* Mobile Bottom Navigation Bar */}
+      <MobileBottomNav
+        activeMode={activeMode}
+        setActiveMode={setActiveMode}
+        savedCount={savedIds.length}
+        unreadCount={1}
+        onOpenSaved={() => {
+          setActiveMode('seeker');
+          setShowSavedOnly(!showSavedOnly);
+        }}
+        onOpenChat={() => setChatCaregiver(caregivers[0])}
+        onOpenSupport={() => setShowSupportModal(true)}
+        onOpenForm={() => {
+          setActiveMode('seeker');
+          setTimeout(() => {
+            const elem = document.getElementById('form-section');
+            if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }}
+        theme={theme}
+        setTheme={setTheme}
+        resolvedTheme={resolvedTheme}
+      />
 
     </div>
   );
