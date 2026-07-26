@@ -20,8 +20,8 @@
       "sizes": "180x180"
     }
   ],
-  "start_url": "./future/",
-  "scope": "./future/",
+  "start_url": "./",
+  "scope": "./",
   "background_color": "#FAF9F6",
   "theme_color": "#4A6741",
   "display": "standalone",
