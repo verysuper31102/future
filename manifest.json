@@ -20,7 +20,7 @@
       "sizes": "180x180"
     }
   ],
-  "start_url": "./",
+  "start_url": "./future",
   "scope": "./",
   "background_color": "#FAF9F6",
   "theme_color": "#4A6741",
