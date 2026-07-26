@@ -1,5 +1,7 @@
 import React from 'react';
-import { Heart, MessageSquare, ShieldCheck, FileText, PhoneCall, HeartHandshake, UserCheck, Search } from 'lucide-react';
+import { Heart, MessageSquare, ShieldCheck, FileText, PhoneCall, HeartHandshake, UserCheck, Search, ClipboardList } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
+import { ThemeMode } from '../hooks/useTheme';
 
 interface HeaderProps {
   activeMode: 'seeker' | 'caregiver' | 'ops';
@@ -11,6 +13,11 @@ interface HeaderProps {
   onOpenBookings: () => void;
   onOpenChat: () => void;
   onOpenSupport: () => void;
+  onOpenForm?: () => void;
+  theme: ThemeMode;
+  setTheme: (theme: ThemeMode) => void;
+  resolvedTheme: 'light' | 'dark';
+  isSystemDark: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -23,6 +30,11 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenBookings,
   onOpenChat,
   onOpenSupport,
+  onOpenForm,
+  theme,
+  setTheme,
+  resolvedTheme,
+  isSystemDark,
 }) => {
   return (
     <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#E5E2D9] shadow-xs">
@@ -137,13 +149,38 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </button>
 
+            {/* Google Form Link */}
+            <button
+              onClick={() => {
+                if (onOpenForm) {
+                  onOpenForm();
+                } else {
+                  const elem = document.getElementById('form-section');
+                  if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#4A6741]/10 hover:bg-[#4A6741] text-[#4A6741] hover:text-white rounded-full text-xs font-medium border border-[#4A6741]/30 transition-all cursor-pointer"
+              title="前往新客戶基本資料表單"
+            >
+              <ClipboardList className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">新客戶基本資料表單</span>
+            </button>
+
+            {/* Theme Mode Toggle (Light / Dark / System) */}
+            <ThemeToggle
+              theme={theme}
+              setTheme={setTheme}
+              resolvedTheme={resolvedTheme}
+              isSystemDark={isSystemDark}
+            />
+
             {/* Support & Emergency Hotline */}
             <button
               onClick={onOpenSupport}
-              className="flex items-center gap-1.5 px-4 py-2 bg-[#F1F0EB] hover:bg-[#E5E2D9] text-[#2C2C2C] rounded-full text-xs font-medium border border-[#E5E2D9] transition-all ml-1"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#F1F0EB] hover:bg-[#E5E2D9] text-[#2C2C2C] rounded-full text-xs font-medium border border-[#E5E2D9] transition-all ml-1"
             >
               <PhoneCall className="w-3.5 h-3.5 text-[#D4A373]" />
-              <span className="hidden sm:inline">24H 專人客服</span>
+              <span className="hidden sm:inline">24H 客服</span>
             </button>
 
           </div>

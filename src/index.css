@@ -1,22 +1,85 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-serif: "Noto Serif TC", Georgia, serif;
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --color-sage-primary: #4A6741;
   --color-sage-dark: #3B5334;
   --color-ochre-accent: #D4A373;
-  --color-cream-bg: #FAF9F6;
-  --color-cream-card: #FFFFFF;
-  --color-cream-subtle: #F1F0EB;
-  --color-cream-border: #E5E2D9;
-  --color-text-main: #2C2C2C;
-  --color-text-muted: #6B665F;
-  --color-text-subtle: #9A958E;
+}
+
+:root {
+  --bg-main: #FAF9F6;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #F1F0EB;
+  --border-color: #E5E2D9;
+  --text-main: #2C2C2C;
+  --text-muted: #6B665F;
+  --text-subtle: #9A958E;
+}
+
+html.dark {
+  --bg-main: #121612;
+  --bg-card: #1C221A;
+  --bg-subtle: #252E23;
+  --border-color: #323D2E;
+  --text-main: #F2F0E9;
+  --text-muted: #B2ADA3;
+  --text-subtle: #807B73;
 }
 
 body {
-  background-color: #FAF9F6;
-  color: #2C2C2C;
+  background-color: var(--bg-main);
+  color: var(--text-main);
   font-family: var(--font-sans);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
+
+/* Global dark mode overrides for smooth dark experience */
+html.dark body {
+  background-color: #121612;
+  color: #F2F0E9;
+}
+
+html.dark .bg-white {
+  background-color: #1C221A !important;
+}
+
+html.dark .bg-\[\#FAF9F6\] {
+  background-color: #121612 !important;
+}
+
+html.dark .bg-\[\#F1F0EB\] {
+  background-color: #252E23 !important;
+}
+
+html.dark .border-\[\#E5E2D9\] {
+  border-color: #323D2E !important;
+}
+
+html.dark .text-\[\#2C2C2C\] {
+  color: #F2F0E9 !important;
+}
+
+html.dark .text-\[\#6B665F\] {
+  color: #B2ADA3 !important;
+}
+
+html.dark .text-\[\#9A958E\] {
+  color: #807B73 !important;
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #252E23 !important;
+  color: #F2F0E9 !important;
+  border-color: #323D2E !important;
+}
+
+html.dark ::placeholder {
+  color: #807B73 !important;
+}
+

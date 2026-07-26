@@ -19,6 +19,8 @@ import { CarePortfolioCarousel } from './components/CarePortfolioCarousel';
 import { ParallaxSection } from './components/ParallaxSection';
 import { ScrollReveal } from './components/ScrollReveal';
 import { MagneticButton } from './components/MagneticButton';
+import { GoogleFormSection } from './components/GoogleFormSection';
+import { useTheme } from './hooks/useTheme';
 
 import { MOCK_CAREGIVERS, MOCK_REVIEWS, MOCK_COURSES, INITIAL_BOOKINGS } from './data/mockData';
 import { CORPORATE_SLOGANS, STATS_DATA, MOCK_PORTFOLIOS } from './data/portfolioData';
@@ -27,6 +29,9 @@ import { Sparkles, Heart, ShieldCheck, HeartHandshake, CheckCircle2 } from 'luci
 
 
 export default function App() {
+  // Theme Manager (Light, Dark, System Preference)
+  const { theme, setTheme, resolvedTheme, isSystemDark } = useTheme();
+
   // Navigation Mode: 'seeker' (Family Seeker), 'caregiver' (Caregiver Provider Dashboard), 'ops' (Platform Operations)
   const [activeMode, setActiveMode] = useState<'seeker' | 'caregiver' | 'ops'>('seeker');
 
@@ -212,6 +217,17 @@ export default function App() {
         onOpenBookings={() => setShowOpsModal(true)}
         onOpenChat={() => setChatCaregiver(caregivers[0])}
         onOpenSupport={() => setShowSupportModal(true)}
+        onOpenForm={() => {
+          setActiveMode('seeker');
+          setTimeout(() => {
+            const elem = document.getElementById('form-section');
+            if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }}
+        theme={theme}
+        setTheme={setTheme}
+        resolvedTheme={resolvedTheme}
+        isSystemDark={isSystemDark}
       />
 
       {/* Main Content Area */}
@@ -361,6 +377,13 @@ export default function App() {
               </div>
             )}
 
+            {/* 6. Embedded Google Form Section */}
+            <ScrollReveal delay={100} direction="up">
+              <div className="pt-8">
+                <GoogleFormSection id="form-section" />
+              </div>
+            </ScrollReveal>
+
           </div>
         )}
 
@@ -401,6 +424,19 @@ export default function App() {
             <span>｜ 簡單文青風格本國照服員智慧媒合平台</span>
           </div>
           <div className="flex items-center gap-4 text-[#A0AEC0]">
+            <button
+              onClick={() => {
+                setActiveMode('seeker');
+                setTimeout(() => {
+                  const elem = document.getElementById('form-section');
+                  if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              }}
+              className="text-[#4A6741] font-medium hover:underline cursor-pointer"
+            >
+              填寫新客戶基本資料表單
+            </button>
+            <span>•</span>
             <span>衛生福利部定型化契約範本標準</span>
             <span>•</span>
             <span>第三方價金託管履約保證</span>
