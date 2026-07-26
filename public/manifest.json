@@ -1,30 +1,31 @@
 {
   "short_name": "CareLink",
   "name": "CareLink 暖心看護 - 智慧照護媒合",
+  "id": "/future/",
+  "start_url": "/future/",
+  "scope": "/future/",
+  "display": "standalone",
+  "background_color": "#FAF9F6",
+  "theme_color": "#4A6741",
+  "orientation": "portrait",
+  "description": "CareLink 簡單文青風格本國照服員智慧媒合平台",
   "icons": [
     {
-      "src": "./pwa-192x192.png",
+      "src": "/future/pwa-192x192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "./pwa-512x512.png",
+      "src": "/future/pwa-512x512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
     },
     {
-      "src": "./apple-touch-icon.png",
+      "src": "/future/apple-touch-icon.png",
       "type": "image/png",
       "sizes": "180x180"
     }
-  ],
-  "start_url": "./",
-  "scope": "./",
-  "background_color": "#FAF9F6",
-  "theme_color": "#4A6741",
-  "display": "standalone",
-  "orientation": "portrait",
-  "description": "CareLink 簡單文青風格本國照服員智慧媒合平台"
+  ]
 }
