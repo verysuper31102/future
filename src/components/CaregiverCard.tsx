@@ -1,6 +1,8 @@
 import React from 'react';
 import { Heart, Star, ShieldCheck, MapPin, Calendar, MessageSquare, Check, Sparkles, ChevronRight } from 'lucide-react';
 import { Caregiver } from '../types';
+import { TiltCard } from './TiltCard';
+import { MagneticButton } from './MagneticButton';
 
 interface CaregiverCardProps {
   caregiver: Caregiver;
@@ -20,7 +22,8 @@ export const CaregiverCard: React.FC<CaregiverCardProps> = ({
   onChat,
 }) => {
   return (
-    <div className="group bg-white rounded-xl border border-[#E5E2D9] hover:border-[#4A6741] p-5 sm:p-6 transition-all duration-200 shadow-xs relative flex flex-col justify-between">
+    <TiltCard maxTilt={8} scale={1.01} className="h-full">
+      <div className="group bg-white rounded-xl border border-[#E5E2D9] hover:border-[#4A6741] p-5 sm:p-6 transition-all duration-200 shadow-xs relative flex flex-col justify-between h-full">
       
       <div>
         {/* Card Header: Avatar, Name, Verified Badges, Match Score */}
@@ -156,18 +159,20 @@ export const CaregiverCard: React.FC<CaregiverCardProps> = ({
             檔案預覽 <ChevronRight className="w-3.5 h-3.5 text-[#9A958E]" />
           </button>
 
-          <button
+          <MagneticButton
             onClick={() => onBook(caregiver)}
-            className="px-4 py-2 rounded-lg text-xs font-medium bg-[#4A6741] hover:opacity-90 text-white shadow-xs transition-all flex items-center gap-1"
+            className="px-4 py-2 text-xs font-medium"
+            variant="primary"
           >
             <Calendar className="w-3.5 h-3.5" /> 預約試配
-          </button>
+          </MagneticButton>
 
         </div>
 
       </div>
 
     </div>
+    </TiltCard>
   );
 };
 

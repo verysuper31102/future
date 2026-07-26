@@ -16,6 +16,9 @@ import { OpsDashboardModal } from './components/OpsDashboardModal';
 import { TypewriterSlogan } from './components/TypewriterSlogan';
 import { AnimatedCounter } from './components/AnimatedCounter';
 import { CarePortfolioCarousel } from './components/CarePortfolioCarousel';
+import { ParallaxSection } from './components/ParallaxSection';
+import { ScrollReveal } from './components/ScrollReveal';
+import { MagneticButton } from './components/MagneticButton';
 
 import { MOCK_CAREGIVERS, MOCK_REVIEWS, MOCK_COURSES, INITIAL_BOOKINGS } from './data/mockData';
 import { CORPORATE_SLOGANS, STATS_DATA, MOCK_PORTFOLIOS } from './data/portfolioData';
@@ -193,7 +196,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] text-[#2C2C2C] font-sans selection:bg-[#4A6741]/20 selection:text-[#4A6741] flex flex-col">
+    <div className="min-h-screen bg-[#FAF9F6] text-[#2C2C2C] font-sans selection:bg-[#4A6741]/20 selection:text-[#4A6741] flex flex-col relative">
       
       {/* App Header */}
       <Header
@@ -219,63 +222,84 @@ export default function App() {
           <div className="space-y-8">
             
             {/* 1. Typewriter Corporate Care System Slogan */}
-            <TypewriterSlogan slogans={CORPORATE_SLOGANS} />
+            <ScrollReveal delay={0} direction="up">
+              <TypewriterSlogan slogans={CORPORATE_SLOGANS} />
+            </ScrollReveal>
 
-            {/* Professional Polish Hero Banner */}
-            <div className="relative bg-white rounded-2xl border border-[#E5E2D9] p-6 sm:p-8 shadow-xs overflow-hidden">
-              <div className="max-w-2xl space-y-3 relative z-10">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F1F0EB] text-[#4A6741] text-xs font-semibold border border-[#E5E2D9]">
-                  <Sparkles className="w-3.5 h-3.5 text-[#D4A373]" /> CareLink 智慧專人照護 concierge 服務
+            {/* 2. Parallax Hero Banner */}
+            <ScrollReveal delay={100} direction="up">
+              <ParallaxSection
+                bgImage="https://images.unsplash.com/photo-1576765608622-067973a79f53?auto=format&fit=crop&q=80&w=1600"
+                overlayOpacity={0.88}
+                speed={0.2}
+              >
+                <div className="p-6 sm:p-10 space-y-4 text-white">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-[#D4A373] text-xs font-semibold border border-white/20">
+                    <Sparkles className="w-3.5 h-3.5" /> CareLink 智慧專人照護 concierge 服務
+                  </div>
+                  <h1 className="text-2xl sm:text-4xl font-serif font-bold tracking-tight text-white leading-tight">
+                    用心挑選，給家人最暖心的溫柔照護。
+                  </h1>
+                  <p className="text-xs sm:text-sm text-white/80 font-sans leading-relaxed max-w-2xl">
+                    專業國家單一級照服員驗證、警察良民證雙重審核，搭配衛生福利部標準定型化契約與第三方專戶託管服務。
+                  </p>
+
+                  {/* Platform Guarantees Badges */}
+                  <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-white/90 font-medium">
+                    <span className="flex items-center gap-1.5 bg-black/20 backdrop-blur-xs px-3 py-1 rounded-lg border border-white/10">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" /> 100% 本國優質照服員
+                    </span>
+                    <span className="flex items-center gap-1.5 bg-black/20 backdrop-blur-xs px-3 py-1 rounded-lg border border-white/10">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" /> 警察刑事紀錄良民證核驗
+                    </span>
+                    <span className="flex items-center gap-1.5 bg-black/20 backdrop-blur-xs px-3 py-1 rounded-lg border border-white/10">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" /> 第三方履約價金託管保障
+                    </span>
+                  </div>
+
+                  <div className="pt-2 flex items-center gap-3">
+                    <MagneticButton
+                      onClick={() => setShowSupportModal(true)}
+                      className="px-5 py-2.5 text-xs font-bold shadow-lg"
+                      variant="secondary"
+                    >
+                      權益保障與專人評估 →
+                    </MagneticButton>
+                  </div>
                 </div>
-                <h1 className="text-2xl sm:text-3xl font-serif font-bold tracking-tight text-[#2C2C2C] leading-tight">
-                  用心挑選，給家人最暖心的溫柔照護。
-                </h1>
-                <p className="text-xs sm:text-sm text-[#6B665F] font-sans leading-relaxed">
-                  專業國家單一級照服員驗證、警察良民證雙重審核，搭配衛生福利部標準定型化契約與第三方專戶託管服務。
-                </p>
+              </ParallaxSection>
+            </ScrollReveal>
 
-                {/* Platform Guarantees Badges */}
-                <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-[#6B665F] font-medium">
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#4A6741]" /> 100% 本國優質照服員
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#4A6741]" /> 警察刑事紀錄良民證核驗
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#4A6741]" /> 第三方履約價金託管保障
-                  </span>
-                </div>
-              </div>
+            {/* 3. Animated Jumping Stats Counter */}
+            <ScrollReveal delay={200} direction="up">
+              <AnimatedCounter stats={STATS_DATA} />
+            </ScrollReveal>
 
-              {/* Decorative subtle background shape */}
-              <div className="absolute top-0 right-0 w-80 h-80 bg-[#F1F0EB] rounded-full blur-3xl opacity-70 pointer-events-none -mr-20 -mt-20" />
-            </div>
-
-            {/* 2. Animated Jumping Stats Counter (Actual Views, Care Portfolios, Serviced Families) */}
-            <AnimatedCounter stats={STATS_DATA} />
-
-            {/* 3. Auto-rotating Caregiver Portfolio Showcase Carousel */}
-            <CarePortfolioCarousel
-              portfolios={MOCK_PORTFOLIOS}
-              autoplayInterval={4000}
-              onSelectCaregiver={(cgId) => {
-                const cg = caregivers.find((c) => c.id === cgId);
-                if (cg) setSelectedCaregiver(cg);
-              }}
-              onBookCaregiver={(cgId) => {
-                const cg = caregivers.find((c) => c.id === cgId) || caregivers[0];
-                setBookingCaregiver(cg);
-              }}
-            />
+            {/* 4. Auto-rotating Caregiver Portfolio Showcase Carousel */}
+            <ScrollReveal delay={300} direction="up">
+              <CarePortfolioCarousel
+                portfolios={MOCK_PORTFOLIOS}
+                autoplayInterval={4000}
+                onSelectCaregiver={(cgId) => {
+                  const cg = caregivers.find((c) => c.id === cgId);
+                  if (cg) setSelectedCaregiver(cg);
+                }}
+                onBookCaregiver={(cgId) => {
+                  const cg = caregivers.find((c) => c.id === cgId) || caregivers[0];
+                  setBookingCaregiver(cg);
+                }}
+              />
+            </ScrollReveal>
 
             {/* Smart Match & Search Filter Box */}
-            <CaregiverSearchFilter
-              filter={filter}
-              setFilter={setFilter}
-              totalCount={filteredCaregivers.length}
-              onReset={handleResetFilters}
-            />
+            <ScrollReveal delay={400} direction="up">
+              <CaregiverSearchFilter
+                filter={filter}
+                setFilter={setFilter}
+                totalCount={filteredCaregivers.length}
+                onReset={handleResetFilters}
+              />
+            </ScrollReveal>
 
 
             {/* Saved filter pill indicator */}
