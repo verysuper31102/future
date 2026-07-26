@@ -1,0 +1,22 @@
+{
+  "short_name": "CareLink",
+  "name": "CareLink 暖心看護 - 智慧照護媒合",
+  "icons": [
+    {
+      "src": "pwa-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "pwa-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#FAF9F6",
+  "theme_color": "#4A6741",
+  "display": "standalone",
+  "orientation": "portrait",
+  "description": " CareLink 簡單文青風格本國照服員智慧媒合平台"
+}
