@@ -3,23 +3,20 @@ import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 
-// 1. Service Worker Registration with /future/ scope
+// 1. Service Worker Registration with explicit /future/ scope
 if ('serviceWorker' in navigator && typeof window !== 'undefined') {
   window.addEventListener('load', () => {
-    const isGitHubPages = window.location.pathname.startsWith('/future') || window.location.hostname.includes('github.io');
-    const swUrl = isGitHubPages ? '/future/sw.js' : './sw.js';
-    const swScope = isGitHubPages ? '/future/' : './';
-
     navigator.serviceWorker
-      .register(swUrl, { scope: swScope })
+      .register('/future/sw.js', { scope: '/future/' })
       .then((reg) => {
         console.log('CareLink Service Worker registered with scope:', reg.scope);
       })
       .catch((err) => {
-        console.warn('SW registration primary attempt warning:', err);
+        console.warn('Primary SW registration (/future/sw.js) warning:', err);
+        // Fallback for local sandbox environment
         navigator.serviceWorker
           .register('./sw.js')
-          .catch((e) => console.log('SW registration skipped:', e));
+          .catch((e) => console.log('SW registration fallback skipped:', e));
       });
   });
 }
@@ -33,9 +30,7 @@ if (typeof window !== 'undefined') {
       canonicalLink.rel = 'canonical';
       document.head.appendChild(canonicalLink);
     }
-    if (window.location.hostname.includes('github.io')) {
-      canonicalLink.href = 'https://verysuper31102.github.io/future/';
-    }
+    canonicalLink.href = 'https://verysuper31102.github.io/future/';
   } catch (e) {
     console.error('Failed to set canonical link:', e);
   }

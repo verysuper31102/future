@@ -11,17 +11,13 @@ export const InstallPwaModal: React.FC<InstallPwaModalProps> = ({ isOpen, onClos
 
   if (!isOpen) return null;
 
-  // Get current direct URL preserving path (e.g. /future)
+  // Get current direct URL preserving path (/future/)
   const isIframe = typeof window !== 'undefined' && window.self !== window.top;
-  let currentUrl = typeof window !== 'undefined' ? window.location.href : '';
-
-  if (isIframe) {
-    try {
-      if (window.top && window.top.location.href) {
-        currentUrl = window.top.location.href;
-      }
-    } catch (e) {
-      // Cross-origin fallback uses current iframe URL which includes path
+  let currentUrl = 'https://verysuper31102.github.io/future/';
+  if (typeof window !== 'undefined') {
+    if (window.location.hostname.includes('github.io')) {
+      currentUrl = 'https://verysuper31102.github.io/future/';
+    } else {
       currentUrl = window.location.href;
     }
   }
