@@ -3,25 +3,25 @@
   "name": "CareLink 暖心看護 - 智慧照護媒合",
   "icons": [
     {
-      "src": "/pwa-192x192.png",
+      "src": "./pwa-192x192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "/pwa-512x512.png",
+      "src": "./pwa-512x512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
     },
     {
-      "src": "/apple-touch-icon.png",
+      "src": "./apple-touch-icon.png",
       "type": "image/png",
       "sizes": "180x180"
     }
   ],
-  "start_url": "./future",
-  "scope": "./",
+  "start_url": "./future/",
+  "scope": "./future/",
   "background_color": "#FAF9F6",
   "theme_color": "#4A6741",
   "display": "standalone",
