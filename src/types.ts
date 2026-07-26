@@ -132,3 +132,23 @@ export interface DocumentUploadStatus {
   cprCertVerified: boolean; // CPR證照
   longTermCareCardVerified: boolean; // 長照小卡
 }
+
+export interface CarePortfolio {
+  id: string;
+  title: string;
+  subtitle: string;
+  caregiverId: string;
+  caregiverName: string;
+  caregiverAvatar: string;
+  caregiverTitle: string;
+  patientCondition: string;
+  outcome: string;
+  viewsCount: number;
+  likesCount: number;
+  tags: string[];
+  coverImage: string;
+  date: string;
+  fullDescription: string;
+  highlights: string[];
+}
+

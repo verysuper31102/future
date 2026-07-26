@@ -13,10 +13,15 @@ import { CaregiverDashboard } from './components/CaregiverDashboard';
 import { ChatDrawer } from './components/ChatDrawer';
 import { SupportModal } from './components/SupportModal';
 import { OpsDashboardModal } from './components/OpsDashboardModal';
+import { TypewriterSlogan } from './components/TypewriterSlogan';
+import { AnimatedCounter } from './components/AnimatedCounter';
+import { CarePortfolioCarousel } from './components/CarePortfolioCarousel';
 
 import { MOCK_CAREGIVERS, MOCK_REVIEWS, MOCK_COURSES, INITIAL_BOOKINGS } from './data/mockData';
+import { CORPORATE_SLOGANS, STATS_DATA, MOCK_PORTFOLIOS } from './data/portfolioData';
 import { FilterState, Caregiver, Booking } from './types';
 import { Sparkles, Heart, ShieldCheck, HeartHandshake, CheckCircle2 } from 'lucide-react';
+
 
 export default function App() {
   // Navigation Mode: 'seeker' (Family Seeker), 'caregiver' (Caregiver Provider Dashboard), 'ops' (Platform Operations)
@@ -213,6 +218,9 @@ export default function App() {
         {activeMode === 'seeker' && (
           <div className="space-y-8">
             
+            {/* 1. Typewriter Corporate Care System Slogan */}
+            <TypewriterSlogan slogans={CORPORATE_SLOGANS} />
+
             {/* Professional Polish Hero Banner */}
             <div className="relative bg-white rounded-2xl border border-[#E5E2D9] p-6 sm:p-8 shadow-xs overflow-hidden">
               <div className="max-w-2xl space-y-3 relative z-10">
@@ -244,6 +252,23 @@ export default function App() {
               <div className="absolute top-0 right-0 w-80 h-80 bg-[#F1F0EB] rounded-full blur-3xl opacity-70 pointer-events-none -mr-20 -mt-20" />
             </div>
 
+            {/* 2. Animated Jumping Stats Counter (Actual Views, Care Portfolios, Serviced Families) */}
+            <AnimatedCounter stats={STATS_DATA} />
+
+            {/* 3. Auto-rotating Caregiver Portfolio Showcase Carousel */}
+            <CarePortfolioCarousel
+              portfolios={MOCK_PORTFOLIOS}
+              autoplayInterval={4000}
+              onSelectCaregiver={(cgId) => {
+                const cg = caregivers.find((c) => c.id === cgId);
+                if (cg) setSelectedCaregiver(cg);
+              }}
+              onBookCaregiver={(cgId) => {
+                const cg = caregivers.find((c) => c.id === cgId) || caregivers[0];
+                setBookingCaregiver(cg);
+              }}
+            />
+
             {/* Smart Match & Search Filter Box */}
             <CaregiverSearchFilter
               filter={filter}
@@ -251,6 +276,7 @@ export default function App() {
               totalCount={filteredCaregivers.length}
               onReset={handleResetFilters}
             />
+
 
             {/* Saved filter pill indicator */}
             {showSavedOnly && (
