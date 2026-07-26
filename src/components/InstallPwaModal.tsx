@@ -11,9 +11,20 @@ export const InstallPwaModal: React.FC<InstallPwaModalProps> = ({ isOpen, onClos
 
   if (!isOpen) return null;
 
-  // Get current direct URL
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  // Get current direct URL preserving path (e.g. /future)
   const isIframe = typeof window !== 'undefined' && window.self !== window.top;
+  let currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
+  if (isIframe) {
+    try {
+      if (window.top && window.top.location.href) {
+        currentUrl = window.top.location.href;
+      }
+    } catch (e) {
+      // Cross-origin fallback uses current iframe URL which includes path
+      currentUrl = window.location.href;
+    }
+  }
 
   const handleCopy = () => {
     navigator.clipboard.writeText(currentUrl);
