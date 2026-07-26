@@ -21,6 +21,7 @@ import { ScrollReveal } from './components/ScrollReveal';
 import { MagneticButton } from './components/MagneticButton';
 import { GoogleFormSection } from './components/GoogleFormSection';
 import { MobileBottomNav } from './components/MobileBottomNav';
+import { InstallPwaModal } from './components/InstallPwaModal';
 import { useTheme } from './hooks/useTheme';
 
 import { MOCK_CAREGIVERS, MOCK_REVIEWS, MOCK_COURSES, INITIAL_BOOKINGS } from './data/mockData';
@@ -60,6 +61,7 @@ export default function App() {
   const [showSupportModal, setShowSupportModal] = useState(false);
   const [showOpsModal, setShowOpsModal] = useState(false);
   const [showSavedOnly, setShowSavedOnly] = useState(false);
+  const [showInstallPwaModal, setShowInstallPwaModal] = useState(false);
 
   // Toggle Save Favorite
   const handleToggleSave = (id: string) => {
@@ -225,6 +227,7 @@ export default function App() {
             if (elem) elem.scrollIntoView({ behavior: 'smooth' });
           }, 100);
         }}
+        onOpenInstallPwa={() => setShowInstallPwaModal(true)}
         theme={theme}
         setTheme={setTheme}
         resolvedTheme={resolvedTheme}
@@ -523,9 +526,16 @@ export default function App() {
             if (elem) elem.scrollIntoView({ behavior: 'smooth' });
           }, 100);
         }}
+        onOpenInstallPwa={() => setShowInstallPwaModal(true)}
         theme={theme}
         setTheme={setTheme}
         resolvedTheme={resolvedTheme}
+      />
+
+      {/* PWA / iOS Home Screen Install Modal */}
+      <InstallPwaModal
+        isOpen={showInstallPwaModal}
+        onClose={() => setShowInstallPwaModal(false)}
       />
 
     </div>

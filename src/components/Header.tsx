@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, MessageSquare, ShieldCheck, FileText, PhoneCall, HeartHandshake, UserCheck, Search, ClipboardList } from 'lucide-react';
+import { Heart, MessageSquare, ShieldCheck, FileText, PhoneCall, HeartHandshake, UserCheck, Search, ClipboardList, Smartphone } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { ThemeMode } from '../hooks/useTheme';
 
@@ -14,6 +14,7 @@ interface HeaderProps {
   onOpenChat: () => void;
   onOpenSupport: () => void;
   onOpenForm?: () => void;
+  onOpenInstallPwa?: () => void;
   theme: ThemeMode;
   setTheme: (theme: ThemeMode) => void;
   resolvedTheme: 'light' | 'dark';
@@ -31,6 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenChat,
   onOpenSupport,
   onOpenForm,
+  onOpenInstallPwa,
   theme,
   setTheme,
   resolvedTheme,
@@ -175,6 +177,18 @@ export const Header: React.FC<HeaderProps> = ({
               isSystemDark={isSystemDark}
               className="shrink-0"
             />
+
+            {/* Install Mobile PWA / iOS Shortcut */}
+            {onOpenInstallPwa && (
+              <button
+                onClick={onOpenInstallPwa}
+                className="flex items-center gap-1 sm:gap-1.5 p-2 sm:px-3 sm:py-2 bg-[#F1F0EB] dark:bg-[#252E23] hover:bg-[#E5E2D9] dark:hover:bg-[#323D2E] text-[#2C2C2C] dark:text-[#F2F0E9] rounded-full text-xs font-medium border border-[#E5E2D9] dark:border-[#323D2E] transition-all cursor-pointer shrink-0"
+                title="加到手機主畫面 (iOS / Android 捷徑)"
+              >
+                <Smartphone className="w-3.5 h-3.5 text-[#D4A373]" />
+                <span className="hidden sm:inline">加到桌面</span>
+              </button>
+            )}
 
             {/* Support & Emergency Hotline */}
             <button

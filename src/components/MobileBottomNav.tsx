@@ -11,6 +11,7 @@ interface MobileBottomNavProps {
   onOpenChat: () => void;
   onOpenSupport: () => void;
   onOpenForm: () => void;
+  onOpenInstallPwa?: () => void;
   theme: ThemeMode;
   setTheme: (theme: ThemeMode) => void;
   resolvedTheme: 'light' | 'dark';
@@ -25,6 +26,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   onOpenChat,
   onOpenSupport,
   onOpenForm,
+  onOpenInstallPwa,
   theme,
   setTheme,
   resolvedTheme,
@@ -111,6 +113,18 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
             {theme === 'system' ? '隨手機' : theme === 'dark' ? '深色' : '淺色'}
           </span>
         </button>
+
+        {/* Install Mobile PWA Shortcut */}
+        {onOpenInstallPwa && (
+          <button
+            onClick={onOpenInstallPwa}
+            className="flex flex-col items-center gap-0.5 p-1.5 text-[#6B665F] dark:text-[#B2ADA3] hover:text-[#4A6741] dark:hover:text-[#7EA373] transition-colors cursor-pointer"
+            title="加到桌面"
+          >
+            <Smartphone className="w-5 h-5 text-[#D4A373]" />
+            <span className="text-[10px]">加到桌面</span>
+          </button>
+        )}
 
         {/* 24H Hotline */}
         <button
