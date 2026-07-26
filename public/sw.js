@@ -1,4 +1,4 @@
-const CACHE_NAME = 'carelink-v1';
+const CACHE_NAME = 'carelink-v2';
 
 const getBasePath = () => {
   if (typeof self !== 'undefined' && self.location) {
